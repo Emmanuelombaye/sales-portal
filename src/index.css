@@ -1,0 +1,94 @@
+@layer base {
+  :root {
+    --ascend-purple: #6a369e;
+    --ascend-purple-light: #7b4bb2;
+    --ascend-orange: #ff6b1a;
+    --ascend-blue: #2d72b8;
+    --ascend-cyan: #00a3e0;
+    --ascend-dark: #002244;
+    --ascend-bg-light: #f3f9fc;
+    --ascend-card-bg: #ffffff;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', 'Lexend', system-ui, -apple-system, sans-serif;
+  background-color: #f3f9fc;
+  color: #002244;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Lexend', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.ascend-logo-text {
+  font-family: 'Comfortaa', 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Ascend Notched Tab Card Styling */
+.ascend-notch-card {
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ascend-btn-orange {
+  background: #ff6b1a;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 11px 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(255, 107, 26, 0.35);
+}
+
+.ascend-btn-orange:hover {
+  background: #e65c0d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 107, 26, 0.45);
+}
+
+/* Service Image Cards with Wave Overlay */
+.ascend-service-card {
+  border-radius: 28px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.ascend-service-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

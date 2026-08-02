@@ -1,0 +1,66 @@
+import { resolvePartnerCarePathRewrite } from "./careSubdomain";
+
+/**
+ * Maps first DNS label → app path for staff/partner portals on subdomains
+ * (e.g. admin.peakhealth.io → /admin). Only applied when the hostname matches
+ * our Vercel apex (see {@link shouldApplySubdomainPortalMap}).
+ */
+/** Hostname suffixes where the first DNS label selects the staff portal path. */
+const PORTAL_HOST_SUFFIXES = [".peakhealth.io", ".peak-health.io"] as const;
+
+export const SUBDOMAIN_PORTAL_PATH: Record<string, string> = {
+  admin: "/admin",
+  superadmin: "/superadmin",
+  /** Public name "doctors" host → `/providers` path. */
+  doctors: "/providers",
+  /** Legacy/alternate subdomain. */
+  doctor: "/doctor",
+  patient: "/patient",
+  affiliate: "/affiliate",
+};
+
+export function shouldApplySubdomainPortalMap(hostname: string): boolean {
+  const h = hostname.toLowerCase();
+  if (h === "localhost" || h.startsWith("127.0.0.1")) return true;
+  return PORTAL_HOST_SUFFIXES.some((suffix) => h.endsWith(suffix));
+}
+
+/** If the user landed on a portal subdomain at `/`, rewrite the path before the router mounts. */
+export function applySubdomainPortalPathRewrite(): void {
+  if (typeof window === "undefined") return;
+  const { hostname, pathname } = window.location;
+  if (!shouldApplySubdomainPortalMap(hostname)) return;
+
+  const sub = hostname.split(".")[0]?.toLowerCase() ?? "";
+  const target = SUBDOMAIN_PORTAL_PATH[sub];
+  if (!target) return;
+
+  if (pathname === "/" || pathname === "") {
+    window.history.replaceState(null, "", target);
+  }
+}
+
+/**
+ * Partner white-label hosts (care.brand.com, admin.brand.com) → /care/:slug/…
+ * Runs before React Router so deep links work on branded subdomains.
+ */
+export function applyPartnerCareSubdomainRewrite(): void {
+  if (typeof window === "undefined") return;
+  const { hostname, pathname } = window.location;
+  const next = resolvePartnerCarePathRewrite(hostname, pathname);
+  if (!next || next === pathname) return;
+  window.history.replaceState(null, "", next);
+}
+
+/** Normalize legacy marketing-style path `/Affiliate` → `/affiliate`. */
+export function applyAffiliatePathCaseNormalize(): void {
+  if (typeof window === "undefined") return;
+  const { pathname } = window.location;
+  if (pathname === "/Affiliate" || pathname.startsWith("/Affiliate/")) {
+    window.history.replaceState(
+      null,
+      "",
+      "/affiliate" + pathname.slice("/Affiliate".length),
+    );
+  }
+}
