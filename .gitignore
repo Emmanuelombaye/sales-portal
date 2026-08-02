@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+transcript.txt
+config.bat
+.env
+.env.*
+!.env*.example
+
+
