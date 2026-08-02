@@ -1,0 +1,422 @@
+/* Ascend Medical–style nested hero (logo notch + bottom-right cutouts) */
+
+.ascend-page {
+  --ascend-navy: #002855;
+  --ascend-orange: #ff7826;
+  --ascend-cyan: #00a7e1;
+  --ascend-purple-a: #b14fc5;
+  --ascend-purple-b: #7e57c5;
+  --ascend-white: #ffffff;
+  background: var(--ascend-white);
+  color: var(--ascend-navy);
+  font-family: Poppins, sans-serif;
+}
+
+.ascend-alert {
+  background: var(--ascend-navy);
+  color: #fff;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+}
+
+.ascend-alert a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Header sits above hero; logo column drops into the image */
+.ascend-header {
+  position: relative;
+  z-index: 20;
+  width: calc(100% - 2em);
+  margin-inline: 1em;
+  margin-top: 0;
+  padding-top: 0;
+  background: transparent;
+}
+
+.ascend-header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.ascend-logo-col {
+  position: relative;
+  flex-shrink: 1;
+  align-self: flex-end;
+  margin-bottom: -5em;
+  margin-left: -1.5em;
+  z-index: 30;
+}
+
+.ascend-logo {
+  position: relative;
+  display: block;
+  max-width: 320px;
+  margin: 0;
+}
+
+/* White plate behind logo that cuts into the hero */
+.ascend-logo::before {
+  content: "";
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-bottom-right-radius: 2rem;
+  background-color: var(--ascend-white);
+}
+
+.ascend-logo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Concave corner filler where white plate meets hero image */
+.ascend-logo-col::before {
+  content: "";
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  width: calc(2em + 4px);
+  height: calc(2em + 4px);
+  background-color: var(--ascend-white);
+  -webkit-mask-image: url("/ascend/top-left.svg");
+  mask-image: url("/ascend/top-left.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transform: translate(-1px, calc(100% - 1px));
+  bottom: 0;
+  left: 0;
+}
+
+.ascend-logo-col::after {
+  display: none;
+}
+
+.ascend-nav {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  padding-bottom: 0.75rem;
+}
+
+.ascend-nav a,
+.ascend-nav button {
+  color: var(--ascend-navy);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 1.25rem 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: Poppins, sans-serif;
+}
+
+.ascend-nav a:hover,
+.ascend-nav button:hover {
+  color: var(--ascend-orange);
+}
+
+.ascend-header-ctas {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  padding-bottom: 0.85rem;
+}
+
+.ascend-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ascend-orange);
+  color: #fff !important;
+  font-family: Poppins, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 100px;
+  padding: 0.65rem 1.5rem;
+  white-space: nowrap;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+
+.ascend-pill:hover {
+  background: #e86a1c;
+}
+
+/* —— Hero —— */
+.ascend-hero {
+  position: relative;
+  z-index: 10;
+  margin-inline: 1em;
+  padding-bottom: 4rem;
+}
+
+.ascend-hero-grid {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0 4em;
+}
+
+.ascend-media {
+  position: relative;
+  z-index: 1;
+  grid-area: 1 / 1 / span 1 / span 2;
+  width: 100%;
+  border-radius: 2em;
+  aspect-ratio: 16 / 9;
+  min-height: 500px;
+  max-height: calc(100vh - 9em - 2em);
+  overflow: hidden;
+}
+
+.ascend-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2em;
+}
+
+/* Cyan bottom-left overlay shaped by SVG mask */
+.ascend-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2em;
+  background-color: var(--ascend-cyan);
+  opacity: 0.5;
+  -webkit-mask-image: url("/ascend/bottom-left.svg");
+  mask-image: url("/ascend/bottom-left.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left bottom;
+  mask-position: left bottom;
+}
+
+.ascend-hero-title {
+  position: relative;
+  z-index: 2;
+  grid-area: 1 / 1 / span 1 / span 1;
+  align-self: end;
+  width: 100%;
+  max-width: calc(700px - 5rem);
+  margin: 0 0 0 2rem;
+  padding-block: 2rem;
+  color: #fff;
+  font-family: "Playfair Display", gelica, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 2vw + 1.5rem, 3.1875rem);
+  line-height: 1.12;
+  text-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.ascend-hero-card {
+  position: relative;
+  z-index: 2;
+  grid-area: 1 / 2 / span 1 / span 1;
+  align-self: end;
+  background: var(--ascend-white);
+  border-top-left-radius: 2em;
+  padding: 2rem 2rem 2rem 3rem;
+  transform: translate(1px, 1px);
+}
+
+.ascend-hero-subtitle {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.325;
+  background-image: linear-gradient(#b14fc5, #7e57c5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Concave white corners on the bottom-right card */
+.ascend-hero-card::before,
+.ascend-hero-card::after {
+  content: "";
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  width: calc(2em + 4px);
+  height: calc(2em + 4px);
+  background-color: var(--ascend-white);
+  -webkit-mask-image: url("/ascend/bottom-right.svg");
+  mask-image: url("/ascend/bottom-right.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: right bottom;
+  mask-position: right bottom;
+}
+
+.ascend-hero-card::before {
+  bottom: 0;
+  left: 0;
+  transform: translate(calc(-100% + 1px), 0);
+}
+
+.ascend-hero-card::after {
+  top: 0;
+  right: 0;
+  transform: translate(0, calc(-100% + 1px));
+}
+
+.ascend-hero-mobile-cta {
+  display: none;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 951px) {
+  .ascend-nav {
+    display: flex;
+  }
+}
+
+@media (max-width: 1100px) {
+  .ascend-logo {
+    max-width: 200px;
+  }
+
+  .ascend-logo-col {
+    margin-bottom: -3.5em;
+  }
+
+  .ascend-hero-subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 950px) {
+  .ascend-header {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .ascend-header-inner {
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .ascend-logo-col {
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+
+  .ascend-logo {
+    max-width: 140px;
+  }
+
+  .ascend-logo::before,
+  .ascend-logo-col::before,
+  .ascend-logo-col::after {
+    display: none;
+  }
+
+  .ascend-hero {
+    margin-inline: 0.75em;
+    padding-bottom: 2rem;
+  }
+
+  .ascend-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .ascend-media {
+    grid-area: 1 / 1 / span 1 / span 1;
+    min-height: unset;
+    max-height: unset;
+    aspect-ratio: 16 / 10;
+  }
+
+  .ascend-hero-title {
+    grid-area: auto;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    max-width: none;
+    text-align: center;
+    color: var(--ascend-navy);
+    text-shadow: none;
+    font-size: 2.5rem;
+  }
+
+  .ascend-hero-card {
+    grid-area: auto;
+    border-radius: 1.5rem;
+    transform: none;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .ascend-hero-card::before,
+  .ascend-hero-card::after {
+    display: none;
+  }
+
+  .ascend-hero-mobile-cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  .ascend-header-ctas .ascend-pill:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 440px) {
+  .ascend-hero-title {
+    font-size: 1.75rem;
+  }
+
+  .ascend-hero-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .ascend-pill {
+    font-size: 0.75rem;
+    padding: 0.55rem 1rem;
+  }
+}

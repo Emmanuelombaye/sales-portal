@@ -4,8 +4,6 @@ dist/
 *.log
 transcript.txt
 config.bat
-.env
-.env.*
 !.env*.example
 
 
